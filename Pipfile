@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[requires]
+python_version = "3.8"
+
+[packages]
+aws-psycopg2 = "==1.2.1"
+boto3 = "==1.17.26"
+
+[dev-packages]
+pylint = "==2.6.0"
+pylint-report = "==0.1.0"
+pytest = "==6.2.1"
+pytest-html = "==3.1.1"
+pytest-cov = "==2.10.1"
+moto = "*"
+pyyaml = "*"
+
+[scripts]
+test = "python -m unittest discover"
+coverage = "coverage run --source syngenta_digital_dbv/ -m  pytest tests/syngenta_digital_dbv --cov=syngenta_digital_dbv --junitxml ./coverage/reports/xunit.xml --cov-report xml:./coverage/reports/coverage.xml --html=./coverage/unit-test/index.html --self-contained-html --cov-report html:./coverage -p no:warnings -o log_cli=true"
+lint = "pylint syngenta_digital_dbv"
+local = "docker-compose -f tests/local/databases.yml up --remove-orphans"

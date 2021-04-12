@@ -127,3 +127,16 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# docker cotainers
+.neo4j
+.postgres
+.postgis
+.postgis-reset
+.redshift
+.elasticsearch
+
+# ide extras
+.tags
+.DS_Store
+coverage

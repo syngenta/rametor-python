@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+    postgis:
+        image: postgis/postgis:12-2.5
+        container_name: postgis-local
+        restart: always
+        volumes:
+            - ./.postgis/data:/var/lib/postgresql/data
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: Lq4nKg&&TRhHv%7z
+            POSTGRES_DB: dbv-postgis
+    postgis-reset:
+        image: postgis/postgis:12-2.5
+        container_name: postgis-reset-local
+        restart: always
+        command: -p 5433
+        volumes:
+            - ./.postgis-reset/data:/var/lib/postgresql/data
+        ports:
+            - 5433:5433
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: Lq4nKg&&TRhHv%7z
+            POSTGRES_DB: dbv-reset-postgis
