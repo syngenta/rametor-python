@@ -10,7 +10,7 @@ setup(
     url='https://github.com/syngenta-digital/dbv-python.git',
     author='Paul Cruse III, Technical Lead, Syngenta Digital',
     author_email='paul.cruse@syngenta.com',
-    description='A DRY multi-database normalizer.',
+    description='A DRY multi-database migration tool.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     packages=find_packages(),
