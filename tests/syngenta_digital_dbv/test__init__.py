@@ -50,7 +50,7 @@ class VersionerTest(unittest.TestCase):
             versions_directory='tests/mocks/version_seed_files',
             reset_root=False,
             seed=True,
-            seed_directory='tests/mocks/seed_files',
+            seed_directory='tests/mocks/seed_files'
         )
         self.assertEqual(True, True)
 
@@ -80,7 +80,7 @@ class VersionerTest(unittest.TestCase):
             password='Lq4nKg&&TRhHv%7z',
             versions_directory='tests/mocks/version_seed_files',
             ssm_param='local-not-reset-postrgres-config',
-            reset_root=False,
+            reset_root=False
         )
         self.assertEqual(True, True)
 
@@ -96,7 +96,7 @@ class VersionerTest(unittest.TestCase):
                 'database': 'dbv-postgis',
                 'user': 'root',
                 'password': 'Lq4nKg&&TRhHv%7z',
-                'port': 5432,
+                'port': 5432
             })
         )
         syngenta_digital_dbv.version(
@@ -108,7 +108,7 @@ class VersionerTest(unittest.TestCase):
             password='Lq4nKg&&TRhHv%7z',
             versions_directory='tests/mocks/version_seed_files',
             ssm_param=param_name,
-            reset_root=False,
+            reset_root=False
         )
         self.assertEqual(True, True)
 
@@ -123,7 +123,7 @@ class VersionerTest(unittest.TestCase):
             password='Lq4nKg&&TRhHv%7z',
             versions_directory='tests/mocks/version_seed_files',
             ssm_param='local-postrgres-not-config',
-            reset_root=False,
+            reset_root=False
         )
         self.assertEqual(True, True)
 
@@ -138,7 +138,7 @@ class VersionerTest(unittest.TestCase):
                 password='Lq4nKg&&TRhHv%7z',
                 versions_directory='tests/mocks/version_seed_files',
                 ssm_param='local-postrgres-error-config',
-                reset_root=False,
+                reset_root=False
             )
             self.assertEqual(False, True)
         except Exception as error:

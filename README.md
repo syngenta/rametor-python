@@ -1,6 +1,5 @@
-# dbv-python
+# Database Version (dbv)
 Database versioner to be used to version Postgres &amp; Redshift
-
 
 ## Features
 
@@ -9,7 +8,6 @@ Database versioner to be used to version Postgres &amp; Redshift
   * Able to randomize password and store in AWS SSM
   * Useful for CICD deployments
   * Better than sharing data dump exports
-
 
 ## Installation
 
@@ -63,5 +61,7 @@ Option Name         | Required | Type   | Description
 `versions_directory`| true     | string | directory where all you files can be found
 `ssm_param`         | false    | string | ssm param path you want to store your db configs
 `reset_root`        | false    | boolean| whether to reset the root password; will ignore if ssm_param not defined
+`seed`              | false    | boolean| whether to seed data (great for local development)
+`seed_directory`    | false    | string | directory where all you files can be found
 
 *NOTE: File names must be unique and in order (i.e. 1.sql, 2.sql, etc or a.sql, b.sql, etc), this is how the package knows what order to run the files in*
