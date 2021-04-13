@@ -1,4 +1,4 @@
-# Database Version (dbv)
+# Database Versioner (dbv)
 Database versioner to be used to version Postgres &amp; Redshift
 
 ## Features
