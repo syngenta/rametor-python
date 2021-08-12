@@ -2,6 +2,7 @@
 ignore=tests,openapi.yml
 ignore-patterns=test.*?py
 persistent=no
+load-plugins=pylint_quotes
 unsafe-load-any-extension=no
 
 [MESSAGES CONTROL]

@@ -11,13 +11,14 @@ aws-psycopg2 = "==1.2.1"
 boto3 = "==1.17.26"
 
 [dev-packages]
-pylint = "==2.6.0"
-pylint-report = "==0.1.0"
-pytest = "==6.2.1"
-pytest-html = "==3.1.1"
-pytest-cov = "==2.10.1"
-moto = "==2.0.5"
-pyyaml = "==5.4.1"
+pylint = "*"
+pylint-report = "*"
+pylint-quotes = "*"
+pytest = "*"
+pytest-html = "*"
+pytest-cov = "*"
+moto = "*"
+pyyaml = "*"
 
 [scripts]
 test = "python -m unittest discover"
