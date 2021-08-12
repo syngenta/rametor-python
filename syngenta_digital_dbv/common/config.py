@@ -50,11 +50,12 @@ class Config:
             try:
                 result = self.ssm.get_parameter(Name=self.ssm_param, WithDecryption=True)
                 ssm_config = json.loads(result['Parameter']['Value'])
-                self.param_found = True
-                return ssm_config
             except self.ssm.exceptions.ParameterNotFound:
                 return None
             except Exception as e:
                 print(e)
                 raise Exception from e
+            else:
+                self.param_found = True
+                return ssm_config
         return None
