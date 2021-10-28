@@ -3,6 +3,7 @@ from psycopg2.extensions import AsIs
 from syngenta_digital_dbv.common.config import Config
 from syngenta_digital_dbv.common.directory_scanner import DirectoryScanner
 from syngenta_digital_dbv.common.sql_connector import SQLConnector
+import boto3
 
 
 class PostgresVersioner:
@@ -12,6 +13,9 @@ class PostgresVersioner:
         self.version_scanner = DirectoryScanner(directory=kwargs['versions_directory'], extension='.sql')
         self.seed_scanner = DirectoryScanner(directory=kwargs.get('seed_directory'), extension='.sql')
         self.cursor = None
+
+        self.__secretsmanager = kwargs.get('secretmanager', boto3.client('secretmanager'))
+        self.__secrets_id = kwargs.get('secret_id')
 
     def version(self):
         config = self.config.get_config()
@@ -79,3 +83,10 @@ class PostgresVersioner:
                 'new_password': AsIs(self.config.random_password),
             }
             self.cursor.execute(query, params)
+
+            if self.__secrets_id:
+                self.__upversion_proxy_secret(self.__secrets_id)
+
+    def __upversion_proxy_secret(self, secret_id: str):
+        secret_string = self.config.build_secret()
+        self.__secretsmanager.update_secret(SecretId=secret_id, SecretString=secret_string)

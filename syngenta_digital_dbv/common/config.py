@@ -59,3 +59,14 @@ class Config:
                 self.param_found = True
                 return ssm_config
         return None
+
+    def build_secret(self) -> str:
+        return json.dumps(
+            {
+                "host": self.endpoint,
+                "database": self.database,
+                "username": self.user,
+                "password": self.random_password,
+                "port": self.port
+            }
+        )
