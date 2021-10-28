@@ -14,7 +14,7 @@ class PostgresVersioner:
         self.seed_scanner = DirectoryScanner(directory=kwargs.get('seed_directory'), extension='.sql')
         self.cursor = None
 
-        self.__secretsmanager = kwargs.get('secretmanager', boto3.client('secretmanager'))
+        self.__secretsmanager = kwargs.get('secretsmanager', boto3.client('secretsmanager'))
         self.__secrets_id = kwargs.get('secret_id')
 
     def version(self):
