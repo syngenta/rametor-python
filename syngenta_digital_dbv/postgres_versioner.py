@@ -85,8 +85,8 @@ class PostgresVersioner:
             self.cursor.execute(query, params)
 
             if self.__secrets_id:
-                self.__upversion_proxy_secret(self.__secrets_id)
+                self.__upversion_proxy_secret(self.__secrets_id, self.config.random_password)
 
-    def __upversion_proxy_secret(self, secret_id: str):
-        secret_string = self.config.build_secret()
+    def __upversion_proxy_secret(self, secret_id: str, new_password: str):
+        secret_string = self.config.build_proxy_secret(new_password)
         self.__secretsmanager.update_secret(SecretId=secret_id, SecretString=secret_string)

@@ -60,13 +60,13 @@ class Config:
                 return ssm_config
         return None
 
-    def build_secret(self) -> str:
+    def build_proxy_secret(self, new_password) -> str:
         return json.dumps(
             {
                 "host": self.endpoint,
                 "database": self.database,
                 "username": self.user,
-                "password": self.random_password,
+                "password": new_password,
                 "port": self.port
             }
         )

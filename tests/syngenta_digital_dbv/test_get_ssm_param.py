@@ -29,14 +29,14 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(self.Config._Config__get_ssm_param(), {"name": "my_value"})
 
     def test_build_secret(self):
-        actual = self.Config.build_secret()
+        actual = self.Config.build_proxy_secret('random_password')
 
         expected = json.dumps(
             {
                 "host": self.Config.endpoint,
                 "database": self.Config.database,
                 "username": self.Config.user,
-                "password": self.Config.random_password,
+                "password": 'random_password',
                 "port": self.Config.port
             }
         )
