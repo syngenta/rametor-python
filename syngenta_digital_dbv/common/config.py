@@ -77,9 +77,6 @@ class Config:
                 ssm_config = json.loads(result['Parameter']['Value'])
             except self.ssm.exceptions.ParameterNotFound:
                 return None
-            except Exception as e:
-                print(e)
-                raise Exception from e
             else:
                 self.param_found = True
                 return ssm_config
@@ -92,11 +89,7 @@ class Config:
                 if e.response['Error']['Code'] == 'ResourceNotFoundException':
                     return None
                 else:
-                    print(e)
-                    raise Exception from e
-            except Exception as e:
-                print(e)
-                raise Exception from e
+                    raise e
             else:
                 self.param_found = True
                 return secrets_config
