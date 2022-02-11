@@ -71,7 +71,10 @@ class PostgresVersioner:
             self.__apply_versions(files, True)
 
     def __reset_password(self):
-        if self.config.reset_root and not self.config.param_found and self.config.ssm_param:
+        reset_ssm = self.config.reset_root and not self.config.param_found and self.config.ssm_param
+        reset_secrets = self.config.secrets_param and True
+
+        if reset_ssm or reset_secrets:
             print(f'PRINTING PASSWORD (just in case) {self.config.random_password}')
             query = "ALTER ROLE %(user_name)s WITH PASSWORD '%(new_password)s'"
             params = {

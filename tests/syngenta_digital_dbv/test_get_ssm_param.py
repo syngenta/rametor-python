@@ -6,7 +6,7 @@ from moto import mock_ssm
 from syngenta_digital_dbv.common.config import Config
 
 
-class TestConfig(unittest.TestCase):
+class TestConfigSsmParam(unittest.TestCase):
 
     def setUp(self):
         self.Config = Config(
@@ -25,4 +25,4 @@ class TestConfig(unittest.TestCase):
         self.Config.ssm = mock.MagicMock()
         self.Config.ssm.get_parameter.return_value = {"Parameter": {"Value": '{"name": "my_value"}'}}
 
-        self.assertEqual(self.Config._Config__get_ssm_param(), {"name": "my_value"})
+        self.assertEqual(self.Config._Config__get_param(), {"name": "my_value"})
