@@ -13,6 +13,7 @@ PATCH_DICT = {
 
 class TestConfigSecretParam(unittest.TestCase):
 
+    @mock.patch.dict(os.environ, PATCH_DICT)
     def setUp(self):
         self.Config = config.Config(
             endpoint="endpoint",
