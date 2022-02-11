@@ -1,10 +1,17 @@
 import json
+import os
 import unittest
 import warnings
+from unittest import mock
 
 import boto3
 from moto import mock_ssm
+
 import syngenta_digital_dbv
+
+PATCH_DICT = {
+    "AWS_DEFAULT_REGION": "us-east-2"
+}
 
 
 class VersionerTest(unittest.TestCase):
@@ -13,6 +20,7 @@ class VersionerTest(unittest.TestCase):
         warnings.simplefilter('ignore', ResourceWarning)
         self.maxDiff = None
 
+    @mock.patch.dict(os.environ, PATCH_DICT)
     def test_local_versioner_number_files(self):
         syngenta_digital_dbv.version(
             engine='postgres',
@@ -26,6 +34,7 @@ class VersionerTest(unittest.TestCase):
         )
         self.assertEqual(True, True)
 
+    @mock.patch.dict(os.environ, PATCH_DICT)
     def test_local_versioner_letter_files(self):
         syngenta_digital_dbv.version(
             engine='postgres',
@@ -39,6 +48,7 @@ class VersionerTest(unittest.TestCase):
         )
         self.assertEqual(True, True)
 
+    @mock.patch.dict(os.environ, PATCH_DICT)
     def test_versioner_with_seed(self):
         syngenta_digital_dbv.version(
             engine='postgres',
@@ -55,6 +65,7 @@ class VersionerTest(unittest.TestCase):
         self.assertEqual(True, True)
 
     @mock_ssm
+    @mock.patch.dict(os.environ, PATCH_DICT)
     def test_versioner_with_reset_password(self):
         syngenta_digital_dbv.version(
             engine='postgres',
@@ -70,6 +81,7 @@ class VersionerTest(unittest.TestCase):
         self.assertEqual(True, True)
 
     @mock_ssm
+    @mock.patch.dict(os.environ, PATCH_DICT)
     def test_versioner_with_ssm_param_not_reset(self):
         syngenta_digital_dbv.version(
             engine='postgres',
@@ -85,6 +97,7 @@ class VersionerTest(unittest.TestCase):
         self.assertEqual(True, True)
 
     @mock_ssm
+    @mock.patch.dict(os.environ, PATCH_DICT)
     def test_versioner_with_ssm_param_found(self):
         param_name = 'local-postrgres-config'
         client = boto3.client('ssm')
@@ -113,6 +126,7 @@ class VersionerTest(unittest.TestCase):
         self.assertEqual(True, True)
 
     @mock_ssm
+    @mock.patch.dict(os.environ, PATCH_DICT)
     def test_versioner_with_ssm_param_not_found(self):
         syngenta_digital_dbv.version(
             engine='postgres',
@@ -127,6 +141,7 @@ class VersionerTest(unittest.TestCase):
         )
         self.assertEqual(True, True)
 
+    @mock.patch.dict(os.environ, PATCH_DICT)
     def test_versioner_ssm_error_stops_build(self):
         try:
             syngenta_digital_dbv.version(
