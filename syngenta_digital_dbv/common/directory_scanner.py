@@ -1,6 +1,7 @@
 import glob
 import ntpath
 
+
 class DirectoryScanner:
 
     def __init__(self, **kwargs):
