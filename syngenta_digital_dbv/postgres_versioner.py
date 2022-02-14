@@ -72,7 +72,7 @@ class PostgresVersioner:
 
     def __reset_password(self):
         reset_ssm = self.config.reset_root and not self.config.param_found and self.config.ssm_param
-        reset_secrets = self.config.secrets_param and True
+        reset_secrets = self.config.reset_root and not self.config.param_found and self.config.secrets_param
 
         if reset_ssm or reset_secrets:
             print(f'PRINTING PASSWORD (just in case) {self.config.random_password}')
