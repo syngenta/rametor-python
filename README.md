@@ -64,7 +64,7 @@ Option Name         | Required | Type   | Description
 `seed`              | false    | boolean| whether to seed data (great for local development)
 `seed_directory`    | false    | string | directory where all you files can be found
 
-### Postgres/Redshift Example File Contents
+#### Postgres/Redshift Example File Contents
 
 ```sql
 CREATE TABLE users_a (
@@ -111,7 +111,7 @@ Option Name         | Required | Type   | Description
 `seed`              | false    | boolean| whether to seed data (great for local development)
 `seed_directory`    | false    | string | directory where all you files can be found
 
-### Mongo Example File Contents
+#### Mongo Example File Contents
 
 ```json
 [
