@@ -1,0 +1,18 @@
+[
+    {
+        "database": "unit",
+        "collection": "test",
+        "docs": [
+            {
+                "user_email": "email@email.com",
+                "first": "email",
+                "last": "email"
+            },
+            {
+                "user_email": "user@user.com",
+                "first": "user",
+                "last": "user"
+            }
+        ]
+    }
+]

@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
     slack: circleci/slack@3.4.2
-    sonarcloud: sonarsource/sonarcloud@1.0.2
+    sonarcloud: sonarsource/sonarcloud@1.1.1
 commands:
     pipenv-install-dev:
         steps:
@@ -60,6 +60,11 @@ jobs:
                     POSTGRES_USER: root
                     POSTGRES_PASSWORD: Lq4nKg&&TRhHv%7z
                     POSTGRES_DB: dbv-reset-postgis
+            -
+                image: mongo
+                environment:
+                    MONGO_INITDB_ROOT_USERNAME: root
+                    MONGO_INITDB_ROOT_PASSWORD: Lq4nKg&&TRhHv%7z
         steps:
             - checkout
             - pipenv-install-dev
@@ -81,9 +86,9 @@ workflows:
         jobs:
             - install-build-deploy:
                 context:
-                    - tools-cicd
-                    - pypi-token
-                    - sonarcloud-token
+                    - global-devops-cicd
+                    - shared-pypi-token
+                    - shared-sonarcloud-token
                 filters:
                     tags:
                         only: /.*/
@@ -93,9 +98,9 @@ workflows:
         jobs:
             - install-build-test:
                 context:
-                    - tools-cicd
-                    - pypi-token
-                    - sonarcloud-token
+                    - global-devops-cicd
+                    - shared-pypi-token
+                    - shared-sonarcloud-token
                 filters:
                     tags:
                         ignore: /.*/

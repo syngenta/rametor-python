@@ -7,8 +7,9 @@ name = "pypi"
 python_version = "3.8.6"
 
 [packages]
-aws-psycopg2 = "==1.2.1"
-boto3 = "==1.17.26"
+aws-psycopg2 = "*"
+boto3 = "*"
+pymongo= "*"
 
 [dev-packages]
 pylint = "*"

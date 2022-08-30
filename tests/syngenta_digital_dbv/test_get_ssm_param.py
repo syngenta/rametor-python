@@ -13,7 +13,7 @@ class TestConfig(unittest.TestCase):
             endpoint="endpoint",
             database="database",
             user="user",
-            password="passwor",
+            password="password",
             port="port",
             reset_root=False
         )

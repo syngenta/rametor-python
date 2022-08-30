@@ -13,7 +13,31 @@ class VersionerTest(unittest.TestCase):
         warnings.simplefilter('ignore', ResourceWarning)
         self.maxDiff = None
 
-    def test_local_versioner_number_files(self):
+    def test_mongo_local_versioner_number_files(self):
+        syngenta_digital_dbv.version(
+            engine='mongo',
+            database='unit',
+            user='root',
+            password='Lq4nKg&&TRhHv%7z',
+            endpoint='mongodb://localhost:27017/',
+            versions_directory='tests/mocks/mongo/version_number_files'
+        )
+        self.assertEqual(True, True)
+
+    def test_mongo_local_versioner_number_files_with_seed(self):
+        syngenta_digital_dbv.version(
+            engine='mongo',
+            database='unit',
+            user='root',
+            password='Lq4nKg&&TRhHv%7z',
+            endpoint='mongodb://localhost:27017/',
+            versions_directory='tests/mocks/mongo/version_number_files',
+            seed=True,
+            seed_directory='tests/mocks/mongo/seed'
+        )
+        self.assertEqual(True, True)
+
+    def test_postgres_local_versioner_number_files(self):
         syngenta_digital_dbv.version(
             engine='postgres',
             endpoint='localhost',
@@ -21,12 +45,12 @@ class VersionerTest(unittest.TestCase):
             port=5432,
             user='root',
             password='Lq4nKg&&TRhHv%7z',
-            versions_directory='tests/mocks/version_number_files',
+            versions_directory='tests/mocks/postgres/version_number_files',
             reset_root=False
         )
         self.assertEqual(True, True)
 
-    def test_local_versioner_letter_files(self):
+    def test_postgres_local_versioner_letter_files(self):
         syngenta_digital_dbv.version(
             engine='postgres',
             endpoint='localhost',
@@ -34,12 +58,12 @@ class VersionerTest(unittest.TestCase):
             port=5432,
             user='root',
             password='Lq4nKg&&TRhHv%7z',
-            versions_directory='tests/mocks/version_letter_files',
+            versions_directory='tests/mocks/postgres/version_letter_files',
             reset_root=False
         )
         self.assertEqual(True, True)
 
-    def test_versioner_with_seed(self):
+    def test_postgres_versioner_with_seed(self):
         syngenta_digital_dbv.version(
             engine='postgres',
             endpoint='localhost',
@@ -47,15 +71,15 @@ class VersionerTest(unittest.TestCase):
             port=5432,
             user='root',
             password='Lq4nKg&&TRhHv%7z',
-            versions_directory='tests/mocks/version_seed_files',
+            versions_directory='tests/mocks/postgres/version_seed_files',
             reset_root=False,
             seed=True,
-            seed_directory='tests/mocks/seed_files'
+            seed_directory='tests/mocks/postgres/seed_files'
         )
         self.assertEqual(True, True)
 
     @mock_ssm
-    def test_versioner_with_reset_password(self):
+    def test_postgres_versioner_with_reset_password(self):
         syngenta_digital_dbv.version(
             engine='postgres',
             endpoint='localhost',
@@ -64,13 +88,13 @@ class VersionerTest(unittest.TestCase):
             user='root',
             password='Lq4nKg&&TRhHv%7z',
             ssm_param='local-reset-postrgres-config',
-            versions_directory='tests/mocks/version_number_files',
+            versions_directory='tests/mocks/postgres/version_number_files',
             reset_root=True
         )
         self.assertEqual(True, True)
 
     @mock_ssm
-    def test_versioner_with_ssm_param_not_reset(self):
+    def test_postgres_versioner_with_ssm_param_not_reset(self):
         syngenta_digital_dbv.version(
             engine='postgres',
             endpoint='localhost',
@@ -78,14 +102,14 @@ class VersionerTest(unittest.TestCase):
             port=5432,
             user='root',
             password='Lq4nKg&&TRhHv%7z',
-            versions_directory='tests/mocks/version_seed_files',
+            versions_directory='tests/mocks/postgres/version_seed_files',
             ssm_param='local-not-reset-postrgres-config',
             reset_root=False
         )
         self.assertEqual(True, True)
 
     @mock_ssm
-    def test_versioner_with_ssm_param_found(self):
+    def test_postgres_versioner_with_ssm_param_found(self):
         param_name = 'local-postrgres-config'
         client = boto3.client('ssm')
         client.put_parameter(
@@ -106,14 +130,14 @@ class VersionerTest(unittest.TestCase):
             port=5432,
             user='root',
             password='Lq4nKg&&TRhHv%7z',
-            versions_directory='tests/mocks/version_seed_files',
+            versions_directory='tests/mocks/postgres/version_seed_files',
             ssm_param=param_name,
             reset_root=False
         )
         self.assertEqual(True, True)
 
     @mock_ssm
-    def test_versioner_with_ssm_param_not_found(self):
+    def test_postgres_versioner_with_ssm_param_not_found(self):
         syngenta_digital_dbv.version(
             engine='postgres',
             endpoint='localhost',
@@ -121,13 +145,13 @@ class VersionerTest(unittest.TestCase):
             port=5432,
             user='root',
             password='Lq4nKg&&TRhHv%7z',
-            versions_directory='tests/mocks/version_seed_files',
+            versions_directory='tests/mocks/postgres/version_seed_files',
             ssm_param='local-postrgres-not-config',
             reset_root=False
         )
         self.assertEqual(True, True)
 
-    def test_versioner_ssm_error_stops_build(self):
+    def test_postgres_versioner_ssm_error_stops_build(self):
         try:
             syngenta_digital_dbv.version(
                 engine='postgres',
@@ -136,7 +160,7 @@ class VersionerTest(unittest.TestCase):
                 port=5432,
                 user='root',
                 password='Lq4nKg&&TRhHv%7z',
-                versions_directory='tests/mocks/version_seed_files',
+                versions_directory='tests/mocks/postgres/version_seed_files',
                 ssm_param='local-postrgres-error-config',
                 reset_root=False
             )

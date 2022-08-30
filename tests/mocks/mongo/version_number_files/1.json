@@ -1,0 +1,16 @@
+[
+    {
+        "database": "unit",
+        "collection": "test",
+        "operation": "create_index",
+        "query": "user_email",
+        "params": {"background": true, "unique": true}
+    },
+    {
+        "database": "unit",
+        "collection": "test",
+        "operation": "create_index",
+        "query": [["first", 1], ["last", -1]],
+        "params": {"name": "first_last"}
+    }
+]
