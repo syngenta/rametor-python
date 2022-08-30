@@ -17,12 +17,10 @@ class VersionerTest(unittest.TestCase):
         syngenta_digital_dbv.version(
             engine='mongo',
             database='unit',
-            collection='test',
             user='root',
             password='Lq4nKg&&TRhHv%7z',
             endpoint='mongodb://localhost:27017/',
-            versions_directory='tests/mocks/mongo/version_number_files',
-            reset_root=False
+            versions_directory='tests/mocks/mongo/version_number_files'
         )
         self.assertEqual(True, True)
 
@@ -30,14 +28,12 @@ class VersionerTest(unittest.TestCase):
         syngenta_digital_dbv.version(
             engine='mongo',
             database='unit',
-            collection='test',
             user='root',
             password='Lq4nKg&&TRhHv%7z',
             endpoint='mongodb://localhost:27017/',
             versions_directory='tests/mocks/mongo/version_number_files',
             seed=True,
-            seed_directory='tests/mocks/mongo/seed',
-            reset_root=False
+            seed_directory='tests/mocks/mongo/seed'
         )
         self.assertEqual(True, True)
 
