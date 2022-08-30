@@ -74,10 +74,10 @@ class PostgresVersioner:
 
     def __reset_password(self):
         if self.config.reset_root and not self.config.param_found and self.config.ssm_param:
-            print(f'PRINTING PASSWORD (just in case) {self.config.random_password}')
+            print(f'PRINTING PASSWORD (just in case) {self.config.settings["password"]}')
             query = "ALTER ROLE %(user_name)s WITH PASSWORD '%(new_password)s'" # pylint: disable=c4001 (required by sql)
             params = {
                 'user_name': AsIs(self.config.settings['user']),
-                'new_password': AsIs(self.config.settings['random_password']),
+                'new_password': AsIs(self.config.settings['password']),
             }
             self.cursor.execute(query, params)
