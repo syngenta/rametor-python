@@ -12,7 +12,8 @@ class Config:
         self.seed = kwargs.get('seed', False)
         self.param_found = False
         self.random_password = secrets.token_urlsafe(16)
-        self.config['password'] = self.config['password'] if not self.config.get('reset_root', False) else self.random_password
+        self.reset_root = self.config.get('reset_root', False)
+        self.config['password'] = self.config['password'] if not self.reset_root else self.random_password
         self.ssm = boto3.client('ssm')
 
     def get_config(self):
