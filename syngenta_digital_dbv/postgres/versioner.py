@@ -2,7 +2,7 @@ from psycopg2.extensions import AsIs
 
 from syngenta_digital_dbv.common.config import Config
 from syngenta_digital_dbv.common.directory_scanner import DirectoryScanner
-from syngenta_digital_dbv.common.sql_connector import SQLConnector
+from syngenta_digital_dbv.postgres.sql_connector import SQLConnector
 
 
 class PostgresVersioner:
@@ -40,13 +40,15 @@ class PostgresVersioner:
     def __apply_versions(self, new_versions, seed=False):
         outputs = self.__get_outputs(seed)
         for version in new_versions:
-            print(f"{outputs['intent']} {version}")
+            print(f'{outputs["intent"]} {version}')
             try:
-                self.cursor.execute(open(version, 'r').read())
-                self.__remember_version(version, seed)
+                with open(version, 'r', encoding='utf-8') as file:
+                    self.cursor.execute(file.read())
+                    self.__remember_version(version, seed)
+                    file.close()
             except Exception as error:
                 print(f'ERROR WITH {version}', error)
-        print(f"{outputs['happened']} {len(new_versions)} {outputs['item']}")
+        print(f'{outputs["happened"]} {len(new_versions)} {outputs["item"]}')
 
     def __get_outputs(self, seed):
         return {
@@ -73,7 +75,7 @@ class PostgresVersioner:
     def __reset_password(self):
         if self.config.reset_root and not self.config.param_found and self.config.ssm_param:
             print(f'PRINTING PASSWORD (just in case) {self.config.random_password}')
-            query = "ALTER ROLE %(user_name)s WITH PASSWORD '%(new_password)s'"
+            query = 'ALTER ROLE %(user_name)s WITH PASSWORD "%(new_password)s"'
             params = {
                 'user_name': AsIs(self.config.user),
                 'new_password': AsIs(self.config.random_password),

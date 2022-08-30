@@ -7,7 +7,7 @@ with open('README.md', 'r') as fh:
 setup(
     name='syngenta_digital_dbv',
     version=os.getenv('CIRCLE_TAG'),
-    url='https://github.com/syngenta-digital/dbv-python.git',
+    url='https://github.com/syngenta-digital/package-python-dbv.git',
     author='Paul Cruse III, Technical Lead, Syngenta Digital',
     author_email='paul.cruse@syngenta.com',
     description='A DRY multi-database migration tool.',
@@ -16,8 +16,8 @@ setup(
     packages=find_packages(),
     python_requires='>=3.0',
     install_requires=[
-        'aws-psycopg2==1.2.1',
-        'boto3==1.17.26'
+        'aws-psycopg2',
+        'boto3'
     ],
     classifiers=[
         'Environment :: Web Environment',

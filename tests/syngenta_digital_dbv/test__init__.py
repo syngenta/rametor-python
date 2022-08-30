@@ -21,7 +21,7 @@ class VersionerTest(unittest.TestCase):
             port=5432,
             user='root',
             password='Lq4nKg&&TRhHv%7z',
-            versions_directory='tests/mocks/version_number_files',
+            versions_directory='tests/mocks/postgres/version_number_files',
             reset_root=False
         )
         self.assertEqual(True, True)
@@ -34,7 +34,7 @@ class VersionerTest(unittest.TestCase):
             port=5432,
             user='root',
             password='Lq4nKg&&TRhHv%7z',
-            versions_directory='tests/mocks/version_letter_files',
+            versions_directory='tests/mocks/postgres/version_letter_files',
             reset_root=False
         )
         self.assertEqual(True, True)
@@ -47,10 +47,10 @@ class VersionerTest(unittest.TestCase):
             port=5432,
             user='root',
             password='Lq4nKg&&TRhHv%7z',
-            versions_directory='tests/mocks/version_seed_files',
+            versions_directory='tests/mocks/postgres/version_seed_files',
             reset_root=False,
             seed=True,
-            seed_directory='tests/mocks/seed_files'
+            seed_directory='tests/mocks/postgres/seed_files'
         )
         self.assertEqual(True, True)
 
@@ -64,7 +64,7 @@ class VersionerTest(unittest.TestCase):
             user='root',
             password='Lq4nKg&&TRhHv%7z',
             ssm_param='local-reset-postrgres-config',
-            versions_directory='tests/mocks/version_number_files',
+            versions_directory='tests/mocks/postgres/version_number_files',
             reset_root=True
         )
         self.assertEqual(True, True)
@@ -78,7 +78,7 @@ class VersionerTest(unittest.TestCase):
             port=5432,
             user='root',
             password='Lq4nKg&&TRhHv%7z',
-            versions_directory='tests/mocks/version_seed_files',
+            versions_directory='tests/mocks/postgres/version_seed_files',
             ssm_param='local-not-reset-postrgres-config',
             reset_root=False
         )
@@ -106,7 +106,7 @@ class VersionerTest(unittest.TestCase):
             port=5432,
             user='root',
             password='Lq4nKg&&TRhHv%7z',
-            versions_directory='tests/mocks/version_seed_files',
+            versions_directory='tests/mocks/postgres/version_seed_files',
             ssm_param=param_name,
             reset_root=False
         )
@@ -121,7 +121,7 @@ class VersionerTest(unittest.TestCase):
             port=5432,
             user='root',
             password='Lq4nKg&&TRhHv%7z',
-            versions_directory='tests/mocks/version_seed_files',
+            versions_directory='tests/mocks/postgres/version_seed_files',
             ssm_param='local-postrgres-not-config',
             reset_root=False
         )
@@ -136,7 +136,7 @@ class VersionerTest(unittest.TestCase):
                 port=5432,
                 user='root',
                 password='Lq4nKg&&TRhHv%7z',
-                versions_directory='tests/mocks/version_seed_files',
+                versions_directory='tests/mocks/postgres/version_seed_files',
                 ssm_param='local-postrgres-error-config',
                 reset_root=False
             )

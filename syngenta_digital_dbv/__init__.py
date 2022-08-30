@@ -1,4 +1,5 @@
-from syngenta_digital_dbv.postgres_versioner import PostgresVersioner
+from syngenta_digital_dbv.postgres import PostgresVersioner
+from syngenta_digital_dbv.mongo import MongoVersioner
 
 def version(**kwargs):
     if kwargs['engine'] == 'redshift':
@@ -8,4 +9,4 @@ def version(**kwargs):
         postgres_versioner = PostgresVersioner(**kwargs)
         postgres_versioner.version()
     else:
-        raise Exception('engine {} not supported; contribute to get it supported :)'.format(kwargs['engine']))
+        raise Exception(f'engine {kwargs["engine"]} not supported; contribute to get it supported')
