@@ -77,7 +77,7 @@ class PostgresVersioner:
             print(f'PRINTING PASSWORD (just in case) {self.config.random_password}')
             query = "ALTER ROLE %(user_name)s WITH PASSWORD '%(new_password)s'" # pylint: disable=c4001 (required by sql)
             params = {
-                'user_name': AsIs(self.config.user),
-                'new_password': AsIs(self.config.random_password),
+                'user_name': AsIs(self.config.settings['user']),
+                'new_password': AsIs(self.config.settings['random_password']),
             }
             self.cursor.execute(query, params)

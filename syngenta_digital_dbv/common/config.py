@@ -7,27 +7,27 @@ import boto3
 class Config:
 
     def __init__(self, **kwargs):
-        self.config = kwargs
+        self.settings = kwargs
         self.ssm_param = kwargs.get('ssm_param')
         self.seed = kwargs.get('seed', False)
         self.param_found = False
         self.random_password = secrets.token_urlsafe(16)
-        self.reset_root = self.config.get('reset_root', False)
-        self.config['password'] = self.config['password'] if not self.reset_root else self.random_password
+        self.reset_root = self.settings.get('reset_root', False)
+        self.settings['password'] = self.settings['password'] if not self.reset_root else self.random_password
         self.ssm = boto3.client('ssm')
 
     def get_config(self):
         config = self.__get_ssm_param()
         if config:
             return config
-        return self.config
+        return self.settings
 
     def upload_config(self):
         if not self.param_found and self.ssm_param:
             self.ssm.put_parameter(
                 Name=self.ssm_param,
                 Type='SecureString',
-                Value=json.dumps(self.config)
+                Value=json.dumps(self.settings)
             )
 
     def __get_ssm_param(self):
