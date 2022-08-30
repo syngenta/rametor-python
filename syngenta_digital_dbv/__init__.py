@@ -1,5 +1,5 @@
 from syngenta_digital_dbv.postgres.versioner import PostgresVersioner
-from syngenta_digital_dbv.mongo import MongoVersioner
+# from syngenta_digital_dbv.mongo import MongoVersioner
 
 def version(**kwargs):
     if kwargs['engine'] == 'redshift':
