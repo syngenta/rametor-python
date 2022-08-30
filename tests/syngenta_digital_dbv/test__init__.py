@@ -13,7 +13,35 @@ class VersionerTest(unittest.TestCase):
         warnings.simplefilter('ignore', ResourceWarning)
         self.maxDiff = None
 
-    def test_local_versioner_number_files(self):
+    def test_mongo_local_versioner_number_files(self):
+        syngenta_digital_dbv.version(
+            engine='mongo',
+            database='unit',
+            collection='test',
+            user='root',
+            password='Lq4nKg&&TRhHv%7z',
+            endpoint='mongodb://localhost:27017/',
+            versions_directory='tests/mocks/mongo/version_number_files',
+            reset_root=False
+        )
+        self.assertEqual(True, True)
+
+    def test_mongo_local_versioner_number_files_with_seed(self):
+        syngenta_digital_dbv.version(
+            engine='mongo',
+            database='unit',
+            collection='test',
+            user='root',
+            password='Lq4nKg&&TRhHv%7z',
+            endpoint='mongodb://localhost:27017/',
+            versions_directory='tests/mocks/mongo/version_number_files',
+            seed=True,
+            seed_directory='tests/mocks/mongo/seed',
+            reset_root=False
+        )
+        self.assertEqual(True, True)
+
+    def test_postgres_local_versioner_number_files(self):
         syngenta_digital_dbv.version(
             engine='postgres',
             endpoint='localhost',
@@ -26,7 +54,7 @@ class VersionerTest(unittest.TestCase):
         )
         self.assertEqual(True, True)
 
-    def test_local_versioner_letter_files(self):
+    def test_postgres_local_versioner_letter_files(self):
         syngenta_digital_dbv.version(
             engine='postgres',
             endpoint='localhost',
@@ -39,7 +67,7 @@ class VersionerTest(unittest.TestCase):
         )
         self.assertEqual(True, True)
 
-    def test_versioner_with_seed(self):
+    def test_postgres_versioner_with_seed(self):
         syngenta_digital_dbv.version(
             engine='postgres',
             endpoint='localhost',
@@ -55,7 +83,7 @@ class VersionerTest(unittest.TestCase):
         self.assertEqual(True, True)
 
     @mock_ssm
-    def test_versioner_with_reset_password(self):
+    def test_postgres_versioner_with_reset_password(self):
         syngenta_digital_dbv.version(
             engine='postgres',
             endpoint='localhost',
@@ -70,7 +98,7 @@ class VersionerTest(unittest.TestCase):
         self.assertEqual(True, True)
 
     @mock_ssm
-    def test_versioner_with_ssm_param_not_reset(self):
+    def test_postgres_versioner_with_ssm_param_not_reset(self):
         syngenta_digital_dbv.version(
             engine='postgres',
             endpoint='localhost',
@@ -85,7 +113,7 @@ class VersionerTest(unittest.TestCase):
         self.assertEqual(True, True)
 
     @mock_ssm
-    def test_versioner_with_ssm_param_found(self):
+    def test_postgres_versioner_with_ssm_param_found(self):
         param_name = 'local-postrgres-config'
         client = boto3.client('ssm')
         client.put_parameter(
@@ -113,7 +141,7 @@ class VersionerTest(unittest.TestCase):
         self.assertEqual(True, True)
 
     @mock_ssm
-    def test_versioner_with_ssm_param_not_found(self):
+    def test_postgres_versioner_with_ssm_param_not_found(self):
         syngenta_digital_dbv.version(
             engine='postgres',
             endpoint='localhost',
@@ -127,7 +155,7 @@ class VersionerTest(unittest.TestCase):
         )
         self.assertEqual(True, True)
 
-    def test_versioner_ssm_error_stops_build(self):
+    def test_postgres_versioner_ssm_error_stops_build(self):
         try:
             syngenta_digital_dbv.version(
                 engine='postgres',
