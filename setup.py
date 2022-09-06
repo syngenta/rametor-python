@@ -17,7 +17,8 @@ setup(
     python_requires='>=3.0',
     install_requires=[
         'aws-psycopg2',
-        'boto3'
+        'boto3',
+        'pymongo'
     ],
     classifiers=[
         'Environment :: Web Environment',

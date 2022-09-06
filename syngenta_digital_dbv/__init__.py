@@ -1,4 +1,3 @@
-
 def version(**kwargs): # pylint: disable=R0911
     if kwargs['engine'] in ('redshift', 'postgres'):
         from syngenta_digital_dbv.postgres.versioner import PostgresVersioner # pylint: disable=C
